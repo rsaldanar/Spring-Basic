@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *s
@@ -27,12 +30,22 @@ public class UsuarioModel {
     @Column(unique = true, nullable = false)
     private Long usuario_id;
     
+    @NotNull
+    @Size(min = 3, message = "Se requiere entrar un Nombre.")
+    @Pattern(regexp = "[a-z]", message = "Solo Letras")
     private String nombre;
+    @NotNull
+    @Size(min = 3, message = "Se requiere entrar un Apellido")
+    @Pattern(regexp = "[a-z]", message = "Solo Letras")
     private String apellido;
+    @NotNull
+    @Size(min = 1, message = "Se requiere entrar la Edad.")
+    @Pattern(regexp = "[1-9]", message = "Solo Numero")
     private Integer edad;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contacto_id")
+    @Pattern(regexp = "[0-9]", message = "Solo Numero")
     private ContactoModel contacto_id_usuario;
     
     

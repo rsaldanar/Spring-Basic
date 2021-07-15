@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -27,9 +29,11 @@ public class ContactoModel {
     private Long contacto_id;
     
 ////    @Column(columnDefinition = "NUMERIC")
+    @Pattern(regexp = "[0-9]{10}", message = "Solo 10 valores Numericos")
     private Integer telefono;
     
     private String direccion;
+    @Email()
     private String mail;
 
     public Long getIdContacto() {

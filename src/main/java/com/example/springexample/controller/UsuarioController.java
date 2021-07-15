@@ -10,7 +10,9 @@ import com.example.springexample.models.UsuarioModel;
 import com.example.springexample.services.UsuarioService;
 import java.util.ArrayList;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +40,7 @@ public class UsuarioController {
     }
     
     @PostMapping()
-    public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuarioModel){
+    public UsuarioModel guardarUsuario(@Valid @RequestBody UsuarioModel usuarioModel, BindingResult resultadoValidacionGuardarUsuario){
         return this.usuarioService.guardarUsuario(usuarioModel);
     }
     
