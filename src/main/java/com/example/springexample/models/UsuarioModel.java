@@ -5,6 +5,8 @@
  */
 package com.example.springexample.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +14,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Range;
 
 /**
  *s
@@ -31,22 +36,26 @@ public class UsuarioModel {
     private Long usuario_id;
     
     @NotNull
-    @Size(min = 3, message = "Se requiere entrar un Nombre.")
-    @Pattern(regexp = "[a-z]", message = "Solo Letras")
+//    @Size(min = 3, message = "Se requiere entrar un Nombre.")
+//    @Pattern(regexp = "[a-z]", message = "Solo Letras")
     private String nombre;
     @NotNull
-    @Size(min = 3, message = "Se requiere entrar un Apellido")
-    @Pattern(regexp = "[a-z]", message = "Solo Letras")
+//    @Size(min = 3, message = "Se requiere entrar un Apellido")
+//    @Pattern(regexp = "[a-z]", message = "Solo Letras")
+//    @Pattern(regexp = "^[0-9]{1,2}$", message = "Edad incorrecta") 
     private String apellido;
     @NotNull
-    @Size(min = 1, message = "Se requiere entrar la Edad.")
-    @Pattern(regexp = "[1-9]", message = "Solo Numero")
+//     @Size(min = 1, message = "Se requiere entrar la Edad.")
+//    @Range(min = 0, max = 99)
+//     @Pattern(regexp = "[1-9]", message = "Solo Numero")
+    @Digits(integer = 2, fraction = 20, message = "SOLO NUMERO PARA EDAD.")
     private Integer edad;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contacto_id")
-    @Pattern(regexp = "[0-9]", message = "Solo Numero")
-    private ContactoModel contacto_id_usuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+//    @JoinColumn(name = "contacto_id")
+//    @Pattern(regexp = "[0-9]", message = "Solo Numero")
+    private List<ContactoModel> contactos;
+//    private ContactoModel contacto_id_usuario;
     
     
     
@@ -92,15 +101,23 @@ public class UsuarioModel {
         this.usuario_id = usuario_id;
     }
 
-    public ContactoModel getContacto_id_usuario() {
-        return contacto_id_usuario;
+    public List<ContactoModel> getContactos() {
+       return contactos;
     }
 
-    public void setContacto_id_usuario(ContactoModel contacto_id_usuario) {
-        this.contacto_id_usuario = contacto_id_usuario;
+    public void setContactos(List<ContactoModel> contactos) {
+        
+        this.contactos = contactos;
     }
-
     
+    public void agregarContacto(ContactoModel contacto) {
+        if (this.contactos == null) {
+            this.contactos = new ArrayList<>();
+        }
+        
+        this.contactos.add(contacto);
+        
+    }
     
     
 }

@@ -5,14 +5,18 @@
  */
 package com.example.springexample.controller;
 
+import com.example.springexample.dto.UsuarioDTO;
 import com.example.springexample.models.ContactoModel;
 import com.example.springexample.models.UsuarioModel;
 import com.example.springexample.services.UsuarioService;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,12 +39,15 @@ public class UsuarioController {
     
     
     @GetMapping()
-    public ArrayList<UsuarioModel> obtenerUsuario(){
-        return usuarioService.obtenerUsuario();
+    public List<UsuarioDTO> obtenerUsuario(){
+        return usuarioService.obtenerUsuario()
+                .stream()
+                .map(UsuarioDTO::new)
+                .collect(Collectors.toList());
     }
     
     @PostMapping()
-    public UsuarioModel guardarUsuario(@Valid @RequestBody UsuarioModel usuarioModel, BindingResult resultadoValidacionGuardarUsuario){
+    public UsuarioModel guardarUsuario(@Valid @RequestBody @Validated UsuarioModel usuarioModel, BindingResult resultadoValidacionGuardarUsuario){
         return this.usuarioService.guardarUsuario(usuarioModel);
     }
     
@@ -51,12 +58,12 @@ public class UsuarioController {
     
     
     @GetMapping(path = "/nombre/{nombre}")//"/query")
-    public ArrayList<UsuarioModel> obtenerContactoPorNombre(@PathVariable("nombre") String nombre){
+    public List<UsuarioModel> obtenerContactoPorNombre(@PathVariable("nombre") String nombre){
         return this.usuarioService.obtenerUsuarioPorNombre(nombre);
     }
     
     @GetMapping(path = "/apellido/{apellido}")//"/query")
-    public ArrayList<UsuarioModel> obtenerContactoPorApellido(@PathVariable("apellido") String apellido){
+    public List<UsuarioModel> obtenerContactoPorApellido(@PathVariable("apellido") String apellido){
         return this.usuarioService.obtenerUsuarioPorApellido(apellido);
     }
     

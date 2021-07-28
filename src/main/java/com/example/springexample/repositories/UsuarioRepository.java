@@ -7,6 +7,7 @@ package com.example.springexample.repositories;
 
 import com.example.springexample.models.UsuarioModel;
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends CrudRepository<UsuarioModel, Long>{
     //Debe tener un endpoint de busqueda por nombre o apellido, telefono y correo electronico.
-       public abstract ArrayList<UsuarioModel> findByNombre(String nombre);
-       public abstract ArrayList<UsuarioModel> findByApellido(String apellido);
+       public abstract List<UsuarioModel> findByNombre(String nombre);
+       public abstract List<UsuarioModel> findByApellido(String apellido);
 }

@@ -10,6 +10,7 @@ import com.example.springexample.models.UsuarioModel;
 import com.example.springexample.repositories.ContactoRepository;
 import com.example.springexample.repositories.UsuarioRepository;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class ContactoService {
     
     
 
-    public ArrayList<ContactoModel> obtenerContacto() {// para obtener los datos de la tabla contacto.
+    public List<ContactoModel> obtenerContacto() {// para obtener los datos de la tabla contacto.
         return (ArrayList<ContactoModel>) contactoRepository.findAll();
     }
 
@@ -39,11 +40,11 @@ public class ContactoService {
         return contactoRepository.findById(idContacto);
     }
 
-    public ArrayList<ContactoModel> obtenerContactoPorTelefono(Integer telefono) {
+    public List<ContactoModel> obtenerContactoPorTelefono(Integer telefono) {
         return contactoRepository.findByTelefono(telefono);
     }
 
-    public ArrayList<ContactoModel> optenerContactoPorMail(String mail) {
+    public List<ContactoModel> optenerContactoPorMail(String mail) {
         return contactoRepository.findByMail(mail);
     }
     

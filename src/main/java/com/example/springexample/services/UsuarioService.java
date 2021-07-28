@@ -9,6 +9,7 @@ import com.example.springexample.models.UsuarioModel;
 import com.example.springexample.repositories.ContactoRepository;
 import com.example.springexample.repositories.UsuarioRepository;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
     
-    public ArrayList<UsuarioModel> obtenerUsuario(){// Para obtener toda la data de la tabla usuario
-        return (ArrayList<UsuarioModel>) usuarioRepository.findAll();
+    public List<UsuarioModel> obtenerUsuario(){// Para obtener toda la data de la tabla usuario
+        return (List<UsuarioModel>) usuarioRepository.findAll();
     }
     
     public UsuarioModel guardarUsuario(UsuarioModel usuarioModel){//Guarda en la tabla contacto
@@ -35,11 +36,11 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
     
-    public ArrayList<UsuarioModel> obtenerUsuarioPorNombre(String nombre){
+    public List<UsuarioModel> obtenerUsuarioPorNombre(String nombre){
         return usuarioRepository.findByNombre(nombre);
     }
     
-    public ArrayList<UsuarioModel> obtenerUsuarioPorApellido(String apellido){
+    public List<UsuarioModel> obtenerUsuarioPorApellido(String apellido){
         return usuarioRepository.findByApellido(apellido);
     }
     

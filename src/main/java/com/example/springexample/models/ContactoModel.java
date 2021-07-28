@@ -10,10 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -29,12 +30,17 @@ public class ContactoModel {
     private Long contacto_id;
     
 ////    @Column(columnDefinition = "NUMERIC")
-    @Pattern(regexp = "[0-9]{10}", message = "Solo 10 valores Numericos")
-    private Integer telefono;
+//    @Pattern(regexp = "[0-9]{10}", message = "Solo 10 valores Numericos")
+    @Digits(integer = 10, fraction = 20, message = "SOLO NUMERO Y 10 DIGITOS.")
+    private String telefono;
     
     private String direccion;
     @Email()
     private String mail;
+    
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario")
+    private UsuarioModel usuario;
 
     public Long getIdContacto() {
         return contacto_id;
@@ -44,11 +50,11 @@ public class ContactoModel {
         this.contacto_id = idContacto;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -66,6 +72,14 @@ public class ContactoModel {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+    
+    public UsuarioModel getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
     
     

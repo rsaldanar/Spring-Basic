@@ -8,6 +8,7 @@ package com.example.springexample.repositories;
 import com.example.springexample.models.ContactoModel;
 import com.example.springexample.models.UsuarioModel;
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContactoRepository extends CrudRepository<ContactoModel, Long>{
      //Debe tener un endpoint de busqueda por nombre o apellido, telefono y correo electronico.
-       public abstract ArrayList<ContactoModel> findByTelefono(Integer telefono);
-       public abstract ArrayList<ContactoModel> findByMail(String mail);
+       public abstract List<ContactoModel> findByTelefono(Integer telefono);
+       public abstract List<ContactoModel> findByMail(String mail);
 }
