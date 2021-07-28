@@ -76,7 +76,7 @@ public class ContactoController {
     }
 
     @PutMapping("/contacto/{contacto_id}")
-    public ResponseEntity<ContactoModel> upDateContacto(@PathVariable("contacto_id") Long contactoId, @RequestBody ContactoModel contactoModel) {
+    public ResponseEntity<ContactoModel> upDateContacto (@PathVariable("contacto_id") Long contactoId, @RequestBody ContactoModel contactoModel) {
         Optional<ContactoModel> contactoOptional = contactoRepository.findById(contactoId);
         if (contactoOptional.isPresent()) {
             ContactoModel contactoModelData = contactoOptional.get();
